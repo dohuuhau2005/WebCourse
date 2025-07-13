@@ -1,0 +1,134 @@
+@import "../extension/libraryColor.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    background-color: $gray;
+
+
+
+    ul {
+        width: 100% !important;
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+
+        .searchbar {
+            flex: 1; // quan trọng để nó to ra
+            max-width: 600px;
+            margin: 0 20px;
+
+
+            .search-container {
+                margin-top: 10px !important;
+                padding: 5px 20px !important;
+                border: 3px solid red;
+                border-radius: 30px;
+
+                input {
+
+                    width: 100%;
+                    height: 100%;
+                    padding: 0 20px;
+                    border: none;
+                    outline: none;
+                    font-size: 16px;
+                    background-color: #ebe6e6;
+                    color: rgb(29, 27, 27);
+
+                }
+            }
+        }
+
+        li {
+            height: 60px;
+
+
+
+            a {
+                height: 100%;
+                padding: 0 40px !important;
+                text-decoration: none !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                color: black !important;
+
+                img {
+                    color: black !important;
+                }
+            }
+
+            a:hover {
+                background-color: aliceblue;
+            }
+        }
+
+        li:first-child {
+            margin-right: auto !important;
+        }
+
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        right: 0 !important;
+        left: auto !important;
+        width: 250px;
+        height: 100vh !important;
+        z-index: 999;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.3);
+        color: $white;
+
+        backdrop-filter: blur(7px);
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+        display: none;
+
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+
+        &.active {
+            transform: translateX(0%);
+            display: flex !important;
+        }
+
+        flex-direction: column;
+        align-items: start;
+        justify-content: flex-start;
+
+        li {
+            width: 100%;
+
+            ;
+
+            a {
+                width: 100%;
+            }
+        }
+
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .hide {
+        display: none !important;
+    }
+
+
+
+}
+
+@media screen and (min-width: 768px) {
+    .hidemenu {
+        display: none !important;
+    }
+}

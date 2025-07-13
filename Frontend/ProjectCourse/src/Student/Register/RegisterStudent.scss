@@ -49,6 +49,17 @@
     }
 }
 
+@media screen and (max-width: 768px) {
+    .contanerCenter {
+        .Form_Register {
+            position: relative;
+            top: 5% !important;
+            left: 10% !important;
+            width: 80vw !important;
+        }
+    }
+
+}
 
 body {
     // background-image: url('https://images.unsplash.com/photo-1496715976403-7e36dc43f17b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');

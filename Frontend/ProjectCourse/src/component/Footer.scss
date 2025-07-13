@@ -1,0 +1,15 @@
+@import "../extension/libraryColor.scss";
+
+footer {
+    background: $blue_primary;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    height: 100% !important;
+    position: relative;
+    width: 100%;
+    bottom: 0px !important;
+    top: auto !important;
+    flex: 1;
+}
