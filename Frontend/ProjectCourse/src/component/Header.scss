@@ -28,8 +28,10 @@ nav {
             .search-container {
                 margin-top: 10px !important;
                 padding: 5px 20px !important;
-                border: 3px solid red;
+                // border: 3px solid red;
                 border-radius: 30px;
+                display: flex;
+                background-color: #ebe6e6;
 
                 input {
 
@@ -42,6 +44,12 @@ nav {
                     background-color: #ebe6e6;
                     color: rgb(29, 27, 27);
 
+                }
+
+                a {
+
+                    // border: 1px solid red;
+                    padding: 2px 4px !important;
                 }
             }
         }

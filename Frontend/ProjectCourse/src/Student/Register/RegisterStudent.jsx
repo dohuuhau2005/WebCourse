@@ -19,28 +19,46 @@ function RegisterStudent() {
         invalidEmail: true,
         invalidBirthday: true,
         invalidPassword: true,
-        invalidConfirmPassword: true
+        invalidConfirmPassword: true,
+        ErrorEmail: "",
+        ErrorBirthday: "",
+        ErrorPassword: "",
+        ErrorConfirmPassword: ""
     };
     const [objectInput, setObjectInput] = useState(defaultValidation);
     const isvalidInput = () => {
         let isValid = true;
-        setObjectInput(defaultValidation);
+        let newValidation = { ...defaultValidation };
+
         if (email === "" || !email.includes("@gmail.com")) {
-            setObjectInput({ ...defaultValidation, invalidEmail: false });
+            newValidation.invalidEmail = false;
+            newValidation.ErrorEmail = "forgot @gmail.com domain";
             isValid = false;
         }
         if (birthday === "") {
-            setObjectInput({ ...defaultValidation, invalidBirthday: false });
+            newValidation.invalidBirthday = false;
+            newValidation.ErrorBirthday = "Please select your birthday";
             isValid = false;
+        } else {
+            const today = new Date().getFullYear();
+            const birthYear = new Date(birthday).getFullYear();
+            if (today - birthYear < 5) {
+                newValidation.invalidBirthday = false;
+                newValidation.ErrorBirthday = "You must be at least 5 years old";
+                isValid = false;
+            }
         }
         if (password === "" || password.length < 6 || password === " ") {
-            setObjectInput({ ...defaultValidation, invalidPassword: false });
+            newValidation.invalidPassword = false;
+            newValidation.ErrorPassword = "At least 6 characters long and cannot be empty or whitespace";
             isValid = false;
         }
         if (confirmPassword !== password) {
-            setObjectInput({ ...defaultValidation, invalidConfirmPassword: false });
+            newValidation.invalidConfirmPassword = false;
+            newValidation.ErrorConfirmPassword = "Confirm password does not match";
             isValid = false;
         }
+        setObjectInput(newValidation);
         return isValid;
 
     }
@@ -52,6 +70,7 @@ function RegisterStudent() {
                         <label className="form-label">Email</label>
                         <input type="email" className={objectInput.invalidEmail ? "form-control" : "form-control is-invalid"} placeholder="Enter your Email" required
                             onChange={(e) => setEmail(e.target.value)} />
+                        {!objectInput.invalidEmail && <p className="invalid-feedback">{objectInput.ErrorEmail}</p>}
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Gender</label>
@@ -62,23 +81,27 @@ function RegisterStudent() {
                             <option value="Other">Other</option>
 
                         </select>
+                        {!objectInput.invalidBirthday && <p className="invalid-feedback">{objectInput.ErrorBirthday}</p>}
                     </div>
                     <div className="mb-3">
                         <label className="form-label">BirthDay</label>
                         <input type="date" className={objectInput.invalidBirthday ? "form-control" : "form-control is-invalid"} placeholder="Enter your BirthDay" required
                             onChange={(e) => setBirthday(e.target.value)}
                         />
+                        {!objectInput.invalidBirthday && <p className="invalid-feedback">{objectInput.ErrorBirthday}</p>}
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Password</label>
                         <input type="password" className={objectInput.invalidPassword ? "form-control" : "form-control is-invalid"} placeholder="Enter your Password" required
                             onChange={(e) => setPassword(e.target.value)}
                         />
+                        {!objectInput.invalidPassword && <p className="invalid-feedback">{objectInput.ErrorPassword}</p>}
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Confirm Password</label>
                         <input type="password" className={objectInput.invalidConfirmPassword ? "form-control" : "form-control is-invalid"} placeholder="Confirm your Password" required
                             onChange={(e) => setConfirmPassword(e.target.value)} />
+                        {!objectInput.invalidConfirmPassword && <p className="invalid-feedback">{objectInput.ErrorConfirmPassword}</p>}
                     </div>
                     <button type="submit" className="btn btn-primary"
                         onClick={(e) => {
