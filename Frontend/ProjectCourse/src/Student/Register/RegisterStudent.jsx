@@ -42,9 +42,19 @@ function RegisterStudent() {
         } else {
             const today = new Date().getFullYear();
             const birthYear = new Date(birthday).getFullYear();
-            if (today - birthYear < 5) {
+            if (today - birthYear > 5) {
                 newValidation.invalidBirthday = false;
                 newValidation.ErrorBirthday = "You must be at least 5 years old";
+                isValid = false;
+            }
+            if (today - birthYear > 100) {
+                newValidation.invalidBirthday = false;
+                newValidation.ErrorBirthday = "You must be less than 100 years old";
+                isValid = false;
+            }
+            if (today < birthYear) {
+                newValidation.invalidBirthday = false;
+                newValidation.ErrorBirthday = "birthday cannot be in the future";
                 isValid = false;
             }
         }
