@@ -54,82 +54,186 @@ nav {
             }
         }
 
-        li {
-            height: 60px;
+        .dropdownMenu {
+            position: relative;
+            display: inline-block;
 
+            .ExploreArrow {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                padding: 0 10px !important;
+                margin-top: 10px !important;
 
+                a {
+                    border: none !important;
+                }
 
-            a {
-                height: 100%;
-                padding: 0 40px !important;
-                text-decoration: none !important;
-                display: flex !important;
-                justify-content: center !important;
-                align-items: center !important;
-                color: black !important;
+                height: 40px;
 
-                img {
+                .aggleDown {
+                    display: none !important;
+                }
+
+                &:hover {
+                    background-color: #f1f1f1;
+                    border: none;
+
+                    .aggleRight {
+                        display: none !important;
+                    }
+
+                    .aggleDown {
+                        display: block !important;
+                    }
+                }
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+
+                a {
+                    text-decoration: none !important;
+                    color: black !important;
+                    padding: 0 10px !important;
+                }
+
+                a:hover {
+                    background-color: #f1f1f1;
+                    border: 1.5px solid #b3a7a7;
+
+                }
+
+                svg {
                     color: black !important;
                 }
             }
 
-            a:hover {
-                background-color: aliceblue;
+            &:hover .ExploreArrow .aggleRight {
+                display: none !important; // Hide right arrow on hover
+            }
+
+            &:hover .ExploreArrow .aggleDown {
+                display: inline-block !important; // Show down arrow on hover
+            }
+
+            ul {
+                display: none;
+                position: absolute;
+                background-color: $gray;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+
+                li {
+                    padding: 12px 16px;
+
+                    a {
+                        color: black !important;
+                        text-decoration: none !important;
+                        display: block !important;
+                    }
+
+                    a:hover {
+                        background-color: #f1f1f1;
+                        border: 1.5px solid #b3a7a7;
+
+                    }
+                }
+            }
+
+            &:hover ul {
+                display: block;
+
             }
         }
-
-        li:first-child {
-            margin-right: auto !important;
-        }
-
     }
 
-    .sidebar {
-        position: fixed;
-        top: 0;
-        right: 0 !important;
-        left: auto !important;
-        width: 250px;
-        height: 100vh !important;
-        z-index: 999;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.3);
-        color: $white;
+    li {
+        height: 60px;
 
-        backdrop-filter: blur(7px);
-        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-        display: none;
 
-        transform: translateX(100%);
-        transition: transform 0.3s ease-in-out;
 
-        &.active {
-            transform: translateX(0%);
+        a {
+            height: 100%;
+            padding: 0 40px !important;
+            text-decoration: none !important;
             display: flex !important;
-        }
+            justify-content: center !important;
+            align-items: center !important;
+            color: black !important;
 
-        flex-direction: column;
-        align-items: start;
-        justify-content: flex-start;
-
-        li {
-            width: 100%;
-
-            ;
-
-            a {
-                width: 100%;
+            img {
+                color: black !important;
             }
         }
 
+        a:hover {
+            background-color: aliceblue;
+        }
+    }
+
+    li:first-child {
+        margin-right: auto !important;
     }
 
 }
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0 !important;
+    left: auto !important;
+    width: 250px;
+    height: 100vh !important;
+    z-index: 999;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: $white;
+
+    backdrop-filter: blur(7px);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    display: none;
+
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+
+    &.active {
+        transform: translateX(0%);
+        display: flex !important;
+    }
+
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-start;
+
+    li {
+        width: 100%;
+
+        ;
+
+        a {
+            width: 100%;
+        }
+    }
+
+    .dropdownMenu {
+        ul {
+            background-color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+        }
+    }
+}
+
+
 
 @media screen and (max-width: 768px) {
     .hide {
         display: none !important;
     }
+
 
 
 
