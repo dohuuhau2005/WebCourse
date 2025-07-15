@@ -1,4 +1,4 @@
-@import "../extension/libraryColor.scss";
+@use "../extension/libraryColor.scss" as *;
 
 * {
     margin: 0;

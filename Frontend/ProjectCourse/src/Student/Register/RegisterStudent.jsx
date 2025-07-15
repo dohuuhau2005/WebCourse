@@ -73,7 +73,7 @@ function RegisterStudent() {
 
     }
     return (
-        <>
+        <><div className="bigregisbody">
             <div className="contanerCenter">
                 <form className='Form_Register'>
                     <div className="mb-3">
@@ -127,6 +127,7 @@ function RegisterStudent() {
                 </form>
 
             </div>
+        </div>
         </>
     );
 }

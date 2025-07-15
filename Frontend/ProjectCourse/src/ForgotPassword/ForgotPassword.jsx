@@ -1,48 +1,41 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { useState } from 'react';
-import './Login.scss';
-import { Link } from 'react-router-dom';
-function Login() {
+import './Forgotpassword.scss'
+function ForgotPassword() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     return (
         <>
-            <div className="Loginbody">
+            <div className="bodyForgotPassword">
                 <div className="Container">
-                    <h1 className="titleLogin">Welcome to 1A3H</h1>
-                    <div className="ContainerLogin">
-
-
-                        <form className="formLogin">
+                    <div className="ContainerForgot">
+                        <form className='formForgotPassword'>
                             <div className="mb-3">
-                                <label className='form-label' htmlFor="email">Email:</label>
+                                <label className="form-label" htmlFor="email">Email</label>
                                 <input className='form-control' type="email" name="email" required onChange={(e) => setEmail(e.target.value)} />
+
                             </div>
+
                             <div className="mb-3">
                                 <label className='form-label' htmlFor="password">Password:</label>
                                 <input className='form-control' type="password" name="password" required onChange={(e) => setPassword(e.target.value)} />
                             </div>
-                            <div className="mb-3 forgotPassword">
-                                <Link to="" className="link">Forgot Password ?</Link>
+                            <div className="mb-3">
+                                <label className='form-label' htmlFor="password">ConfirmPassword:</label>
+                                <input className='form-control' type="password" name="password" required onChange={(e) => setConfirmPassword(e.target.value)} />
                             </div>
-                            <div className="mb-3 dontAccount">
-                                <p>I don't have Account ? </p>{" "}<Link to="" className="link">Register</Link>
-                            </div>
-                            <div className="center">
+                            <div className="btnChangePass">
                                 <button type="submit" className="btn btn-primary"  >
-                                    Login
+                                    Change Password
                                 </button>
                             </div>
-                            <div className="wrongPass"> <p>Password Or Email is wrong !!</p></div>
-
-
                         </form>
-
                     </div>
                 </div>
             </div>
         </>
     )
 }
-export default Login;
+export default ForgotPassword;
