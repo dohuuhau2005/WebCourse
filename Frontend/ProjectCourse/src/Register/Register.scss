@@ -1,0 +1,141 @@
+@use "../extension/libraryColor.scss" as *;
+
+.bodyRegister {
+    width: 100vw;
+    min-height: 100vh;
+    // border: 1px solid red;
+    display: block;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 20px; // thêm padding chống dính lề
+
+    .Container {
+        // border: 1px solid red;
+        width: 100%;
+        text-align: center;
+        overflow: visible;
+
+
+        p {
+            font-size: 3rem; //  chuyển sang đơn vị linh hoạt
+        }
+
+        .ChooseContainer {
+            display: flex;
+            flex-wrap: wrap; //  Cho phép xuống dòng nếu không đủ chỗ
+            justify-content: center;
+            align-items: center;
+            // border: 1px solid red;
+            gap: 20px;
+            align-items: stretch;
+
+            .LeftStudent,
+            .RightInstructor {
+                width: 45%;
+                min-width: 300px;
+                border: 1px solid rgb(161, 158, 158);
+                border-radius: 20px;
+                background: rgba(255, 255, 255, 0.2) !important;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 10px;
+
+                a {
+                    border: 1px solid $gray;
+                    background: $blue_primary;
+                    color: white;
+                }
+
+                a:hover {
+                    background: $blue_secondary;
+                }
+            }
+
+            .LeftStudent {
+                img {
+                    width: 80%;
+                    max-width: 200rem;
+                }
+
+                p {
+                    font-size: 2.5rem;
+                }
+
+                a {
+                    margin-top: 5% !important;
+
+                    border-radius: 20px;
+                    text-decoration: none;
+                    padding: 20px 20px !important;
+                }
+
+
+            }
+
+            .RightInstructor {
+
+
+                .bigpp {
+                    font-size: 2.5rem;
+                }
+
+                a {
+                    margin-top: 5% !important;
+
+                    border-radius: 20px;
+                    text-decoration: none;
+                    padding: 20px 20px !important;
+                }
+
+
+
+                p {
+                    font-size: 1.5rem;
+                }
+
+
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Container {
+        p {
+            font-size: 2rem;
+        }
+
+        .ChooseContainer {
+            flex-direction: column;
+
+            .LeftStudent,
+            .RightInstructor {
+                width: 100% !important;
+                min-width: 0 !important;
+            }
+
+            .LeftStudent img {
+                width: 60%;
+            }
+
+            .RightInstructor {
+                overflow: visible; // đảm bảo không bị ẩn nội dung
+            }
+
+            .RightInstructor p {
+                font-size: 1.2rem !important;
+            }
+
+            .RightInstructor .bigpp {
+                font-size: 3rem !important;
+            }
+        }
+    }
+}

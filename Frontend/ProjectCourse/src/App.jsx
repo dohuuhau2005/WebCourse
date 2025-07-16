@@ -5,6 +5,7 @@ import Footer from "./component/Footer"
 import Login from "./Login/Login"
 import Home from "./Home/Home"
 import ForgotPassword from "./ForgotPassword/ForgotPassword"
+import Register from "./Register/Register"
 function App() {
 
 
@@ -14,7 +15,7 @@ function App() {
 
 
       <Routes>
-        <Route path="/" element={<ForgotPassword />} />
+        <Route path="/" element={<Register />} />
 
 
       </Routes>
