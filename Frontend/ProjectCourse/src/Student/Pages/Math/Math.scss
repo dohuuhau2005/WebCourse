@@ -1,0 +1,95 @@
+@use "../../../extension/libraryColor.scss" as *;
+
+.PageBody {
+    min-height: 100vh;
+    width: 100vw;
+
+    .Topic {
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .Pages {
+        width: 100vw;
+        margin-top: 0.3rem !important;
+        border: 1px solid red;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .container {
+            border: 1px solid red;
+
+
+            max-width: 1300px; // Set a larger max width
+            width: 90vw;
+            display: block;
+
+            .row {
+                row-gap: 20px;
+
+
+                .col-6,
+                .col-md-3 {
+                    .box {
+                        border: 1px solid red !important;
+                        min-height: 200px;
+
+                        .Content {
+                            border: 1px solid #D1D5DB;
+                            width: 80%;
+                            border-radius: 10px;
+                            padding: 10px 5px !important;
+                            background: #f3f4f6ea;
+                        }
+
+                        img {
+                            width: 250px;
+                            height: 150px;
+                        }
+
+                        .btnDetail {
+                            width: 100% !important;
+                            border: 1px solid red !important;
+                            text-align: center;
+                            margin-top: 2% !important;
+
+                            a {
+                                text-decoration: none;
+                                border: 1px solid red;
+                                padding: 3px 4px !important;
+                                border-radius: 15px;
+                                background: $blue_primary;
+                                color: $white
+                            }
+
+                            a:hover {
+                                background: $blue_secondary;
+                                color: black
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+.pagination-btn {
+    margin: 0 10px;
+    padding: 18px 32px;
+    border-radius: 20px !important;
+    font-size: 28px;
+    font-weight: bold;
+    border: 2px solid #3399FF;
+    background: #fff;
+    color: #3399FF;
+    cursor: pointer;
+
+    &.active {
+        background: #3399FF;
+        color: #fff;
+    }
+}

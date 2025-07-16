@@ -6,6 +6,8 @@ import Login from "./Login/Login"
 import Home from "./Home/Home"
 import ForgotPassword from "./ForgotPassword/ForgotPassword"
 import Register from "./Register/Register"
+import RegisterInstructor from "./instructor/Register/RegisterInstructor"
+import MathPage from "./Student/Pages/Math/Math"
 function App() {
 
 
@@ -15,7 +17,7 @@ function App() {
 
 
       <Routes>
-        <Route path="/" element={<Register />} />
+        <Route path="/" element={<MathPage />} />
 
 
       </Routes>

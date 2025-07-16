@@ -1,0 +1,16 @@
+.pagination-btn {
+    margin: 0 10px;
+    padding: 18px 32px;
+    border-radius: 20px !important;
+    font-size: 28px;
+    font-weight: bold;
+    border: 2px solid #3399FF;
+    background: #fff;
+    color: #3399FF;
+    cursor: pointer;
+
+    &.active {
+        background: #3399FF;
+        color: #fff;
+    }
+}

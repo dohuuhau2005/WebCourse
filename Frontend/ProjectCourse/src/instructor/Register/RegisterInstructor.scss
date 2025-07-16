@@ -1,0 +1,51 @@
+@use "../../extension/libraryColor.scss" as *;
+
+.bodyRegisterInstruc {
+    display: flex;
+    width: 100vw;
+    min-height: 100vh;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: center;
+
+    .InstructorIMG {
+        width: 75%;
+        margin-left: 5rem !important;
+        min-height: 500px !important;
+        height: 60%;
+        background: url("https://plus.unsplash.com/premium_vector-1682305458400-fab5f07fdc45?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dGVhY2hlcnxlbnwwfHwwfHx8MA%3D%3D");
+        border: 2px solid $gray;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .contanerCenter {
+        .Form_Register {
+            button {
+                border-radius: 90px !important;
+            }
+
+
+
+            button:hover {
+                color: black
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .InstructorIMG {
+        display: none;
+    }
+
+    .contanerCenter {
+        .Form_Register {
+            position: relative;
+            top: 5% !important;
+            left: 10% !important;
+            width: 80vw !important;
+        }
+    }
+
+}
