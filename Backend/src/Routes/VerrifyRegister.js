@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 require('dotenv').config();
 const User = require('../Models/Users');
 const UserDao = require('../DAO/InsertUserDAO');
-
+const crypto = require('crypto');
 
 router.post('/', async (req, res) => {
     const { email, password, gender, DOB, role } = req.body;
@@ -15,8 +15,9 @@ router.post('/', async (req, res) => {
     const passWithSalt = password + salt;
 
     // 1. Hash mật khẩu
-    const hashedPassword = await bcrypt.hash(passWithSalt, 10);
-
+    // const hashedPassword = await bcrypt.hash(passWithSalt, 10);
+    const hashedPassword = crypto.createHash('sha256').update(passWithSalt).digest('hex');
+    console.log("regis " + hashedPassword)
     // //test luu
     // await verifyUserEmail(email, { gender, DOB, salt, role, password });
 

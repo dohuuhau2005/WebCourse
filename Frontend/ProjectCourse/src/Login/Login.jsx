@@ -2,10 +2,45 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { useState } from 'react';
 import './Login.scss';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { data, useNavigate } from "react-router-dom"
+import axios from 'axios';
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const [loginError, setLoginError] = useState(false);
+
+
+    const HandleLogin = async (e) => {
+        try {
+            const res = await axios.post(`https://localhost:8888/api/Login`,
+                {
+                    email, password
+                }
+            );
+            const success = res.data.success;
+            if (success === true) {
+                setLoginError(false);
+                const role = res.data.user?.role;
+                if (role === "Student") {
+                    navigate('/Home');
+                }
+                if (role === "Instructor") {
+
+                }
+            }
+            else {
+                setLoginError(true);
+            }
+
+
+        } catch (err) {
+            console.error(err);
+            setLoginError(true);
+        }
+    }
+
     return (
         <>
             <div className="Loginbody">
@@ -30,11 +65,22 @@ function Login() {
                                 <p>I don't have Account ? </p>{" "}<Link to="" className="link">Register</Link>
                             </div>
                             <div className="center">
-                                <button type="submit" className="btn btn-primary"  >
+                                <button type="submit" className="btn btn-primary" onClick={
+                                    (e) => {
+                                        e.preventDefault();
+                                        HandleLogin(e);
+                                    }
+                                } >
                                     Login
                                 </button>
                             </div>
-                            <div className="wrongPass"> <p>Password Or Email is wrong !!</p></div>
+                            {loginError &&
+                                (<div className="alert alert-danger mt-3" role="alert">
+                                    Password or Email is incorrect!
+                                </div>
+
+                                )
+                            }
 
 
                         </form>

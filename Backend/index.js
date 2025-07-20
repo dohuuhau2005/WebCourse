@@ -14,6 +14,9 @@ app.use('/api/register', registerRoute);
 const checkUser = require('./src/DAO/checkExistDAO');
 app.use('/api', checkUser);
 
+const Login = require('./src/DAO/LoginDao');
+app.use('/api', Login);
+
 app.get('/', (req, res) => {
     res.send('Hello HTTPS!');
 });

@@ -22,7 +22,7 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/verify" element={<VerifyEmail />} />
 
-
+        <Route path="/Home" element={<Home />} />
       </Routes>
 
 
