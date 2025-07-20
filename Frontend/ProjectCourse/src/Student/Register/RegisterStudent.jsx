@@ -2,12 +2,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { useState } from 'react';
 import './RegisterStudent.scss';
+import axios from 'axios'
+import { data, useNavigate } from "react-router-dom"
+
 function RegisterStudent() {
+
+    //nhận biến và validate
     const [email, setEmail] = useState("");
     const [gender, setGender] = useState("");
     const [birthday, setBirthday] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const navigate = useNavigate();
+    const role = "Student";
+    const [emailExist, setEmailExist] = useState(false);
+
+
     const check = () => {
         console.log("date :", gender);
         console.log("date :", email);
@@ -35,6 +45,12 @@ function RegisterStudent() {
             newValidation.ErrorEmail = "forgot @gmail.com domain";
             isValid = false;
         }
+        if (emailExist) {
+            newValidation.invalidEmail = false;
+            newValidation.ErrorEmail = "Email đã tồn tại trong hệ thống";
+            isValid = false;
+        }
+
         if (birthday === "") {
             newValidation.invalidBirthday = false;
             newValidation.ErrorBirthday = "Please select your birthday";
@@ -42,7 +58,7 @@ function RegisterStudent() {
         } else {
             const today = new Date().getFullYear();
             const birthYear = new Date(birthday).getFullYear();
-            if (today - birthYear > 5) {
+            if (today - birthYear < 5) {
                 newValidation.invalidBirthday = false;
                 newValidation.ErrorBirthday = "You must be at least 5 years old";
                 isValid = false;
@@ -72,6 +88,63 @@ function RegisterStudent() {
         return isValid;
 
     }
+
+
+    //nhận sau khi check ok 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const emailToCheck = email;
+        try {
+            const res = await axios.get(`https://localhost:8888/api/check-email?email=${emailToCheck}`);
+            const exists = res.data.exists;
+
+            // cập nhật UI nếu cần
+            setEmailExist(exists);
+            if (exists) {
+                setObjectInput(prev => ({
+                    ...prev,
+                    invalidEmail: false,
+                    ErrorEmail: "Email đã được đăng ký"
+                }));
+            } else {
+                try {
+                    const formData = {
+                        email: email,
+                        password: password,
+                        gender: gender,
+                        DOB: birthday,
+                        role: role
+
+                    };
+                    const res = await axios.post('https://localhost:8888/api/register', formData);
+                    console.log(res.data);
+                    const data = await res
+                    if (res.status === 200) {
+                        alert("vui Lòng kiểm tra email");
+                        navigate('/verrifyEmail');
+                    } else {
+                        alert("Đăng kí thất bại");
+                    }
+
+                }
+                catch (err) {
+                    console.error("Error : " + err);
+                }
+            }
+
+            return exists;
+        } catch (err) {
+            console.error("Lỗi kiểm tra email:", err);
+            return false; //  throw nếu muốn xử lý lỗi ở ngoài
+        }
+
+
+
+    }
+
+
+
+
     return (
         <><div className="bigregisbody">
             <div className="contanerCenter">
@@ -120,6 +193,7 @@ function RegisterStudent() {
                             if (isvalidInput()) {
                                 console.log("Form is valid");
                                 // Here you can add the logic to submit the form data
+                                handleSubmit(e);
                             } else {
                                 console.log("Form is invalid");
                             }

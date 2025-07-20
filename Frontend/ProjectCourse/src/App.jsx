@@ -8,6 +8,7 @@ import ForgotPassword from "./ForgotPassword/ForgotPassword"
 import Register from "./Register/Register"
 import RegisterInstructor from "./instructor/Register/RegisterInstructor"
 import MathPage from "./Student/Pages/Math/Math"
+import VerifyEmail from "./component/VerrifyEmail"
 function App() {
 
 
@@ -17,7 +18,9 @@ function App() {
 
 
       <Routes>
-        <Route path="/" element={<MathPage />} />
+        <Route path="/" element={<RegisterStudent />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/verify" element={<VerifyEmail />} />
 
 
       </Routes>
