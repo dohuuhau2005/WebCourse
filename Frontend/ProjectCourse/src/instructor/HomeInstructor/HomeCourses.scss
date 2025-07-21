@@ -1,0 +1,121 @@
+.container {
+  display: flex;
+  height: 100vh;
+  background: #e6e6e6;
+}
+
+.sidebar {
+  width: 90px;
+  background: #d1d1d1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.logo {
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+  color: #4b2aad;
+}
+
+.sidebar-item {
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.main {
+  flex: 1;
+  padding: 30px 40px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.courses-title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.search-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #bdbdbd;
+  width: 220px;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.search-btn {
+  background: #fff;
+  border: 1px solid #bdbdbd;
+  border-radius: 20px;
+  padding: 7px 12px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.sort-select {
+  border-radius: 6px;
+  border: 1px solid #bdbdbd;
+  padding: 7px 12px;
+  font-size: 16px;
+  background: #e6e6e6;
+}
+
+.action-btn {
+  background: #4b2aad;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 24px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.course-list {
+}
+
+.course-card {
+  background: #c8d4f7;
+  border-radius: 10px;
+  padding: 18px 24px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.course-actions {
+  min-width: 180px;
+  text-align: right;
+}
+
+.edit-btn,
+.delete-btn {
+  background: #4b2aad;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 7px 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.delete-btn {
+  margin-right: 0;
+}
