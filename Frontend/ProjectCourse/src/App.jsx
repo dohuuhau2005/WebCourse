@@ -9,6 +9,7 @@ import Register from "./Register/Register"
 import RegisterInstructor from "./instructor/Register/RegisterInstructor"
 import MathPage from "./Student/Pages/Math/Math"
 import VerifyEmail from "./component/VerrifyEmail"
+import BuyCourse from "./Student/Pages/BuyCourse/BuyCourse"
 function App() {
 
 
@@ -23,6 +24,8 @@ function App() {
         <Route path="/verify" element={<VerifyEmail />} />
 
         <Route path="/Home" element={<Home />} />
+
+        <Route path="/BuyCourse" element={<BuyCourse />} />
       </Routes>
 
 
