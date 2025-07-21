@@ -1,14 +1,124 @@
+@use "../../../extension/libraryColor.scss" as *;
+
 .bodyBuyCourse {
+    width: 100vw;
     min-height: 100vh;
-    background-color: #fff;
+    // border: 1px solid red;
     display: block;
     overflow-y: auto;
-    width: 100vw;
-    border: 1px solid red;
+    justify-content: center;
+    align-items: center;
 
+
+    .BuyCourseContainer {
+        min-height: 100vh;
+        background-color: #fff;
+
+        overflow-y: auto;
+        min-width: 100%;
+        width: 100% !important;
+
+
+        .textDetail {
+            margin-left: 0.1rem !important;
+
+            .btn-Apply,
+            .btn-buy {
+                padding: 3px 4px !important;
+                border-radius: 10px;
+            }
+
+            .btn:hover {
+                background: $blue_secondary;
+                color: black;
+            }
+        }
+
+    }
 }
 
 .course-image {
     width: 100%;
     border-radius: 10px;
+}
+
+.carousel-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    margin-top: 20px;
+
+    .scroll-btn {
+        background: none;
+        border: none;
+        font-size: 2em;
+        cursor: pointer;
+        z-index: 10;
+        color: #333;
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: scale(1.2);
+            color: #007bff;
+        }
+
+        &.left {
+            margin-right: 10px;
+        }
+
+        &.right {
+            margin-left: 10px;
+        }
+    }
+
+    .carousel-items {
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        gap: 20px;
+        padding: 10px;
+        max-width: 90%;
+        box-sizing: border-box;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .course-card {
+        min-width: 160px;
+        height: 220px;
+        background-color: #8b8989;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        flex-shrink: 0;
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+        }
+
+        .course-image {
+            height: 90px;
+            border-radius: 6px;
+        }
+
+        p {
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        button {
+            font-size: 0.8em;
+            padding: 4px 8px;
+        }
+    }
 }
