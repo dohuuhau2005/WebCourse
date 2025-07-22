@@ -12,14 +12,14 @@
     .Pages {
         width: 100vw;
         margin-top: 0.3rem !important;
-        border: 1px solid red;
+
         display: flex !important;
         align-items: center;
         justify-content: center;
         flex-direction: column;
 
         .container {
-            border: 1px solid red;
+
 
 
             max-width: 1300px; // Set a larger max width
@@ -33,7 +33,7 @@
                 .col-6,
                 .col-md-3 {
                     .box {
-                        border: 1px solid red !important;
+
                         min-height: 200px;
 
                         .Content {
@@ -51,13 +51,13 @@
 
                         .btnDetail {
                             width: 100% !important;
-                            border: 1px solid red !important;
+
                             text-align: center;
                             margin-top: 2% !important;
 
                             a {
                                 text-decoration: none;
-                                border: 1px solid red;
+
                                 padding: 3px 4px !important;
                                 border-radius: 15px;
                                 background: $blue_primary;

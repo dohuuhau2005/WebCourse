@@ -13,14 +13,14 @@ function Register() {
                         <div className="LeftStudent">
                             <p>Student</p>
                             <img src="https://plus.unsplash.com/premium_photo-1663089667998-77622508cd27?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTN8fHN0dWRlbnR8ZW58MHx8MHx8fDA%3D" alt="" />
-                            <Link>Register Student</Link>
+                            <Link to={'/RegisterStudent'} >Register Student</Link>
                         </div>
                         <div className="RightInstructor">
                             <p className="bigpp">Instructor</p>
                             <p>Publish the Course you want and get revenue from them</p>
                             <p>Teach what you know and help learners explore their interests, gain new skills, and advance their careers.</p>
                             <p>Expand your professional network, build your expertise, and earn money on each paid enrollment.</p>
-                            <Link>Register Teacher</Link>
+                            <Link to={"/RegisterInstructor"} >Register Teacher</Link>
                         </div>
                     </div>
 
