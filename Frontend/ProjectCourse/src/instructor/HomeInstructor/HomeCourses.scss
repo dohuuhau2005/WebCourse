@@ -1,0 +1,264 @@
+@use '../../extension/libraryColor.scss' as *;
+
+* {
+  box-sizing: border-box;
+}
+
+.homecourses-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Roboto', sans-serif;
+  background: $gray;
+}
+
+.sidebar {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
+    flex-shrink: 0 !important;
+    height: 100vh !important;
+    background: $white !important;
+    border-right: 2px solid $gray !important;
+    z-index: 9999 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding-top: 24px !important;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.08);
+  
+    .logo-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      padding: 8px 0;
+      .logo-icon {
+        color: $perple;
+        margin-bottom: 4px;
+        font-size: 2.2rem;
+      }
+      .logo-text {
+        color: $perple;
+        font-weight: bold;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+      }
+    }
+  
+    .sidebar-menu {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        li {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          color: $perple;
+          font-size: 1.08rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background 0.2s, color 0.2s;
+          padding: 12px 0 8px 0;
+          border-radius: 8px;
+          width: 90%;
+          &:hover {
+            background: $gray;
+            color: $blue_secondary;
+          }
+          svg {
+            font-size: 1.5rem;
+            margin-bottom: 2px;
+          }
+          span {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+  
+
+.main-content {
+  margin-left: 120px !important;
+  width: calc(100vw - 120px) !important;
+  min-height: 100vh !important;
+  background: $gray !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 48px 56px 0 56px !important;
+  box-sizing: border-box !important;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    h2 {
+      margin: 0 18px 0 0;
+      font-size: 2rem;
+      color: #222;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: $white;
+      border-radius: 8px;
+      padding: 0 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      input {
+        border: none;
+        outline: none;
+        padding: 9px 8px;
+        font-size: 1.08rem;
+        background: transparent;
+        width: 200px;
+        color: black !important;
+      }
+      .search-btn {
+        background: none;
+        border: none;
+        color: $perple;
+        font-size: 1.2rem;
+        cursor: pointer;
+        margin-left: 2px;
+      }
+    }
+    .sort-select {
+      margin-left: 14px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid $blue_secondary;
+      background: $white;
+      color: $blue_secondary;
+      font-size: 1.08rem;
+    }
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    .btn {
+      padding: 9px 22px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.08rem;
+      font-weight: 500;
+      cursor: pointer;
+      &.btn-test {
+        background: $blue_secondary;
+        color: $white;
+        margin-right: 8px;
+      }
+      &.btn-course {
+        background: $perple;
+        color: $white;
+      }
+    }
+    .lecturer-label {
+      margin-left: 18px;
+      color: #222;
+      font-size: 1.08rem;
+      font-weight: 500;
+    }
+    .user-icon {
+      margin-left: 8px;
+      color: $perple;
+      font-size: 1.4rem;
+    }
+  }
+}
+
+.courses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.course-card {
+  background: $blue_primary;
+  border-radius: 14px;
+  padding: 26px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  .course-info {
+    display: flex;
+    flex-direction: row;
+    gap: 70px;
+    .course-label {
+      font-weight: 700;
+      color: $perple;
+      font-size: 1.08rem;
+    }
+    span {
+      color: $white;
+      font-size: 1.08rem;
+    }
+  }
+  .course-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    .btn {
+      padding: 8px 28px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.08rem;
+      font-weight: 500;
+      cursor: pointer;
+      &.btn-edit {
+        background: $perple;
+        color: $white;
+      }
+      &.btn-delete {
+        background: $white;
+        color: $perple;
+        border: 1px solid $perple;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .main-content {
+    padding: 24px 8px 0 8px;
+    width: 100vw;
+    margin-left: 120px;
+  }
+  .course-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+}
+
+.search-bar input {
+  color: #222 !important; // hoặc màu đen
+  background: #fff !important;
+}

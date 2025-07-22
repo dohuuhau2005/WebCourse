@@ -10,27 +10,16 @@ import RegisterInstructor from "./instructor/Register/RegisterInstructor"
 import MathPage from "./Student/Pages/Math/Math"
 import VerifyEmail from "./component/VerrifyEmail"
 import BuyCourse from "./Student/Pages/BuyCourse/BuyCourse"
+import HomeCourses from "./instructor/HomeInstructor/HomeCourses";
 function App() {
 
 
   return (
-    <>
-
-
-
-      <Routes>
-        <Route path="/" element={<RegisterStudent />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/verify" element={<VerifyEmail />} />
-
-        <Route path="/Home" element={<Home />} />
-
-        <Route path="/BuyCourse" element={<BuyCourse />} />
-      </Routes>
-
-
-    </>
-  )
+    <Routes>
+      <Route path="/" element={<HomeCourses />} />
+      <Route path="/instructor/courses" element={<HomeCourses />} />
+    </Routes>
+  );
 }
 //  {/* <Route path="/Login" element={<Login />}></Route> */}
 //     <Route path="/Home" element={<Home />} />
