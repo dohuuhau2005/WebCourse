@@ -4,6 +4,7 @@ const sql = require('mssql');
 const { connection } = require('../Config/Connection');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 
 router.post('/Login', async (req, res) => {
     const { email, password } = req.body;
@@ -13,6 +14,7 @@ router.post('/Login', async (req, res) => {
 
         if (result.recordset.length > 0) {
             const user = result.recordset[0];
+            const userId = user.id_user;
             const salt = user.salt;
             const emailpassDB = String(user.password).trim();
             const role = user.role;
@@ -42,7 +44,13 @@ router.post('/Login', async (req, res) => {
             }
 
             if (hashedPassword === emailpassDB) {
-                return res.status(200).json({ success: true, message: "Đăng nhập thành công", user: { role: role } });
+                const token = jwt.sign({ id: userId, email: email, role: role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+                console.log("token", token);
+                console.log("role", role);
+                console.log("email", email);
+                console.log("userId", userId);
+                return res.status(200).json({ token: token, success: true, message: "Đăng nhập thành công", user: { role: role } });
             } else {
                 return res.status(401).json({ success: false, message: "Sai mật khẩu" });
             }

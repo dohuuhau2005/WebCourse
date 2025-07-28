@@ -20,6 +20,7 @@ function Login() {
                 }
             );
             const success = res.data.success;
+            localStorage.setItem("token", res.data.token);
             if (success === true) {
                 setLoginError(false);
                 const role = res.data.user?.role;
