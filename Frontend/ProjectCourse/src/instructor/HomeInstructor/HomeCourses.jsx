@@ -3,6 +3,7 @@ import './HomeCourses.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faChalkboardTeacher, faComments, faChartBar, faBookOpen, faUser } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const initialCourses = [
   { name: 'Course 1', desc: 'Description 1', date: '2024-06-01' },
@@ -11,6 +12,7 @@ const initialCourses = [
 ];
 
 const HomeCourses = () => {
+  const navigate = useNavigate();
   const [showForm, setShowForm] = React.useState(false);
   const [newCourse, setNewCourse] = React.useState({ name: '', desc: '', date: '' });
   const [courses, setCourses] = React.useState(initialCourses);
@@ -59,6 +61,14 @@ const HomeCourses = () => {
     }
   };
 
+  const handleChatClick = () => {
+    navigate('/instructor/qna');
+  };
+
+  const handleStatisticClick = () => {
+    navigate('/instructor/statistic');
+  };
+
   return (
     <div className="homecourses-container">
       <aside className="sidebar">
@@ -71,8 +81,8 @@ const HomeCourses = () => {
         <nav className="sidebar-menu">
           <ul>
             <li><FontAwesomeIcon icon={faChalkboardTeacher} /> <span>Courses</span></li>
-            <li><FontAwesomeIcon icon={faComments} /> <span>Chat</span></li>
-            <li><FontAwesomeIcon icon={faChartBar} /> <span>Statistic</span></li>
+            <li onClick={handleChatClick} style={{ cursor: 'pointer' }}><FontAwesomeIcon icon={faComments} /> <span>Chat</span></li>
+            <li onClick={handleStatisticClick} style={{ cursor: 'pointer' }}><FontAwesomeIcon icon={faChartBar} /> <span>Statistic</span></li>
             <li><FontAwesomeIcon icon={faBookOpen} /> <span>Resources</span></li>
           </ul>
         </nav>
