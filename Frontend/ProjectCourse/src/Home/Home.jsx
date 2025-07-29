@@ -65,7 +65,7 @@ function Home() {
             <div className="course-card" key={index}>
                 <div className="course-image" style={{ backgroundImage: `url(${course.imageURL})` }} />
                 <div className="course-name">{course.title}</div>
-                <Link to={`/CourseDetail/${course.course_id}`}>
+                <Link to={`/BuyCourse/${encodeURIComponent(course.course_id)}`}>
                     <Button variant="primary" size="sm">Detail</Button>
                 </Link>
             </div>

@@ -11,6 +11,7 @@ import MathPage from "./Student/Pages/BasicCourse/BasicJava"
 import VerifyEmail from "./component/VerrifyEmail"
 import BuyCourse from "./Student/Pages/BuyCourse/BuyCourse"
 import Logout from "./component/Logout"
+import SearchResults from "./Student/Pages/SearchResult/SearchResult"
 function App() {
 
 
@@ -26,7 +27,8 @@ function App() {
 
         <Route path="/Home" element={<Home />} />
 
-        <Route path="/BuyCourse" element={<BuyCourse />} />
+        <Route path="/BuyCourse/:id" element={<BuyCourse />} />
+        <Route path="/SearchResults" element={<SearchResults />} />
         <Route path="/Logout" element={<Logout />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/Register" element={<Register />} />

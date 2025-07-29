@@ -122,11 +122,18 @@ VALUES
     ('CS120', 'GV002', 'https://res.cloudinary.com/dxa5bvsdq/image/upload/v1753191784/pngreact_iku0nn.png', N'Thiết kế API RESTful', N'Học thiết kế API RESTful chuẩn và bảo mật', 1600000, 1440000, GETDATE(), 'CNTT', 13),
     -- 15
     ('CS121', 'GV001', 'https://res.cloudinary.com/dxa5bvsdq/image/upload/v1753183067/cld-sample-4.jpg', N'Lập trình Kotlin', N'Ngôn ngữ Kotlin cho Android và backend', 1800000, 1620000, GETDATE(), 'CNTT', 9);
+INSERT INTO Course
+    (course_id, instructor_id, imageURL,title, description, OldPrice, NewPrice, createdDate, Type, QualitiesLectures)
+VALUES
+    ('CS123', 'GV001', 'https://res.cloudinary.com/dxa5bvsdq/image/upload/v1753183067/cld-sample-4.jpg', N'<h1> test </h1>', N'Ngôn ngữ Kotlin cho Android và backend', 1800000, 1620000, GETDATE
+(), 'CNTT', 9);
 
 SELECT *
 FROM Course
 WHERE Type like N'CNTT';
-
+SELECT *
+FROM Course
+WHERE course_id = 'cs118'
 
 
 

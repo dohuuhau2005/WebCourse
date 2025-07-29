@@ -7,8 +7,8 @@ function Footer() {
                 <p>&copy; {new Date().getFullYear()} 1A3H Course Web. All rights reserved.</p>
                 <p>
                     Follow us on{' '}
-                    <a href="https://twitter.com" className="text-blue-400 hover:underline">
-                        Twitter
+                    <a href="https://zalo.me/0356100675" className="text-blue-400 hover:underline">
+                        zalo
                     </a>{' '}
                     and{' '}
                     <a href="https://facebook.com" className="text-blue-400 hover:underline">
