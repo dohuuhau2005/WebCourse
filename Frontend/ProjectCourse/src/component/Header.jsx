@@ -82,7 +82,7 @@ function Header() {
 
                 {userEmail ? (
                     <>
-                        <li ><Link to="/Profile"><FontAwesomeIcon icon={faUser} /> {userEmail}</Link></li>
+                        <li ><Link to="/ProfileStudent"><FontAwesomeIcon icon={faUser} /> {userEmail}</Link></li>
                         <li ><Link to="/Logout">logout</Link></li>
                     </>
                 ) : (
@@ -140,7 +140,7 @@ function Header() {
 
                 {userEmail ? (
                     <>
-                        <li className='hide'><Link to="/Profile"><FontAwesomeIcon icon={faUser} /> {userEmail}</Link></li>
+                        <li className='hide'><Link to="/ProfileStudent"><FontAwesomeIcon icon={faUser} /> {userEmail}</Link></li>
                         <li className='hide'><Link to="/Logout">logout</Link></li>
                     </>
                 ) : (

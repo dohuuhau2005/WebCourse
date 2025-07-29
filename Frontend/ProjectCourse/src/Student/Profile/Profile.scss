@@ -1,0 +1,86 @@
+* {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.contanerCenter {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    overflow-x: hidden;
+
+    margin-top: 2% !important;
+
+    .Form_Register {
+
+        position: relative;
+        top: 5% !important;
+        left: 35% !important;
+        max-width: 500px;
+        width: 323px;
+        border: 1px solid rgb(185, 180, 180);
+        padding: 30px 40px !important;
+        background: rgba(255, 255, 255, 0.2) !important;
+        opacity: 0.9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+
+        .mb-3 {
+            opacity: 1 !important;
+            margin-bottom: 20px !important;
+
+            .invalid-feedback {
+                color: red !important;
+                size: 300px !important;
+            }
+
+            .form-label {
+                font-weight: bold !important;
+                color: #000000 !important;
+                font-size: 20px !important;
+
+            }
+
+            .form-control {
+                margin-top: 10px !important;
+            }
+        }
+
+        button {
+            padding: 10px 20px !important;
+        }
+
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .contanerCenter {
+        .Form_Register {
+            position: relative;
+            top: 5% !important;
+            left: 10% !important;
+            width: 80vw !important;
+        }
+    }
+
+}
+
+.bigregisbody {
+    // background-image: url('https://images.unsplash.com/photo-1496715976403-7e36dc43f17b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-image: url('https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-repeat: repeat-y;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+
+    p {
+        border: 1px solid red;
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+    }
+}

@@ -20,6 +20,9 @@ app.use('/api', Login);
 const GetAllCourse = require('./src/DAO/Course/GetAllCourse');
 app.use('/api', GetAllCourse);
 
+const GetUser = require('./src/DAO/Users/GetUserDAO');
+app.use('/api', GetUser);
+
 app.get('/', (req, res) => {
     res.send('Hello HTTPS!');
 });

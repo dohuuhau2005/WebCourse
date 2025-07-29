@@ -109,13 +109,14 @@
     .course-card {
         min-width: 160px;
         height: 220px;
-        // background-color: #8b8989;
+        background-color: $gray;
         padding: 10px;
         border-radius: 8px;
         box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         text-align: center;
         flex-shrink: 0;
         transition: transform 0.2s;
+
 
         &:hover {
             transform: translateY(-5px);

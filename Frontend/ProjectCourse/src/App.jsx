@@ -12,6 +12,7 @@ import VerifyEmail from "./component/VerrifyEmail"
 import BuyCourse from "./Student/Pages/BuyCourse/BuyCourse"
 import Logout from "./component/Logout"
 import SearchResults from "./Student/Pages/SearchResult/SearchResult"
+import ProfileStudent from "./Student/Profile/Profile"
 function App() {
 
 
@@ -36,6 +37,7 @@ function App() {
 
         <Route path="/RegisterStudent" element={<RegisterStudent />} />
         <Route path="/RegisterInstructor" element={<RegisterInstructor />} />
+        <Route path="/ProfileStudent" element={<ProfileStudent />} />
       </Routes>
 
 

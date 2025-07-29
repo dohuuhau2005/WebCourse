@@ -197,10 +197,22 @@ CREATE TABLE Enrollments
     enrollmentDate DATE NOT NULL DEFAULT GETDATE(),
     voucher_id VARCHAR(10),
     pricePaid DECIMAL(10,3) NOT NULL,
+    --them
+    voucher_type VARCHAR(20)  ,
     FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE,
     FOREIGN KEY (course_id) REFERENCES Course(course_id) ON DELETE CASCADE,
-    FOREIGN KEY (voucher_id) REFERENCES Voucher(voucher_id) ON DELETE SET NULL
+    -- FOREIGN KEY (voucher_id) REFERENCES Voucher(voucher_id) ON DELETE SET NULL
+    --type đóng vai trò như cả 2 khóa ngoại
+    -- CHECK (voucher_type IN ('Voucher', 'VoucherSystem'))
 );
+insert into Enrollments
+    (student_id, course_id, enrollmentDate, voucher_id, voucher_type,pricePaid)
+VALUES
+    ('ST45cb1825', 'CS101', GETDATE(), 'VC001', 'systemVoucher', 1600000),
+    ('ST45cb1826', 'CS102', GETDATE(), NULL, null, 1350000),
+    ('ST45cb1827', 'CS103', GETDATE(), 'VC001', 'systemVoucher', 1800000),
+    ('ST45cb1828', 'CS104', GETDATE(), NULL, null, 1500000),
+    ('ST45cb1829', 'CS105', GETDATE(), 'VC001', 'systemVoucher', 1700000);
 
 -- ========================================
 -- BẢNG Payments

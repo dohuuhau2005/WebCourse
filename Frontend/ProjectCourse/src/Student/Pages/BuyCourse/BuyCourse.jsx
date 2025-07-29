@@ -10,8 +10,8 @@ function BuyCourse() {
     const [price, setPrice] = useState(10000);
     const [finalPrice, setFinalPrice] = useState(price);
     const [recommendedCourses, setRecommendedCourses] = useState([]);
-  const [discount, setDiscount] = useState(0);
-  
+    const [discount, setDiscount] = useState(0);
+
     const recommendedRef = useRef();
     const [voucherList, setVoucherList] = useState([]);
     const [name, setName] = useState('');
@@ -67,8 +67,9 @@ function BuyCourse() {
                     };
                     const shuffled = shuffle(allCourses);
                     const half = Math.ceil(shuffled.length / 2);
-
-                    setContinueCourses(shuffled.slice(0, half));
+                    console.log("course", allCourses.length);
+                    console.log("shuffled", shuffled.length);
+                    // setContinueCourses(shuffled.slice(0, half));
                     setRecommendedCourses(shuffled.slice(half));
 
 
@@ -119,7 +120,7 @@ function BuyCourse() {
             <div className="course-card" key={index}>
                 <div className="course-image" style={{ backgroundImage: `url(${course.imageURL})` }} />
                 <div className="course-name">{course.title}</div>
-                <Link to={`/BuyCourse/${course.course_id}`}>
+                <Link to={`/BuyCourse/${decodeURIComponent(course.course_id)}`}>
                     <Button variant="primary" size="sm">Detail</Button>
                 </Link>
             </div>
