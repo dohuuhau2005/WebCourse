@@ -194,7 +194,7 @@ function ProfileStudent() {
 
     return (<>
         <Header />
-        <div className="bigregisbody">
+        <div className="bigprofilebody">
             <p >Profile</p>
             <div className="contanerCenter">
                 <form className='Form_Register'>

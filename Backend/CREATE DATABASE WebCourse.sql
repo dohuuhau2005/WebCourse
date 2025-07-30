@@ -1,7 +1,7 @@
 CREATE DATABASE WebCourse
 CREATE TABLE Users
 (
-    id_user VARCHAR(10),
+    id_user VARCHAR(10) NOT NULL PRIMARY KEY,
 
     email VARCHAR(255) UNIQUE,
     password TEXT,
@@ -15,6 +15,12 @@ CREATE TABLE Users
 select *
 from Users
 delete Users WHERE email= 'dhhsvip@gmail.com'
+
+ALTER TABLE Users
+ADD CONSTRAINT PK_Students PRIMARY KEY (id_user);
+
+ALTER TABLE Users
+ALTER COLUMN id_user VARCHAR(10) NOT NULL;
 
 
 
@@ -39,7 +45,7 @@ CREATE TABLE instructor
 (
     instructor_id VARCHAR(20) PRIMARY KEY,
     QuantityCourse INT NOT NULL DEFAULT 0,
-    FOREIGN KEY (instructor_id) REFERENCES Users(user_id) ON DELETE CASCADE
+    FOREIGN KEY (instructor_id) REFERENCES Users(id_user) ON DELETE CASCADE
 );
 
 -- ========================================
@@ -50,7 +56,7 @@ CREATE TABLE staff
     staff_id VARCHAR(20) PRIMARY KEY,
     Name NVARCHAR(50) NOT NULL,
     position VARCHAR(13) NOT NULL,
-    FOREIGN KEY (staff_id) REFERENCES Users(user_id) ON DELETE CASCADE
+    FOREIGN KEY (staff_id) REFERENCES Users(id_user) ON DELETE CASCADE
 );
 
 -- ========================================
@@ -58,10 +64,13 @@ CREATE TABLE staff
 -- ========================================
 CREATE TABLE student
 (
-    student_id VARCHAR(20) PRIMARY KEY,
-    FOREIGN KEY (student_id) REFERENCES Users(user_id) ON DELETE CASCADE
+    student_id VARCHAR(10) PRIMARY KEY,
+    FOREIGN KEY (student_id) REFERENCES Users(id_user) ON DELETE CASCADE
 );
-
+INSERT INTO student
+    (student_id)
+VALUES
+    ('ST45cb1825')
 -- ========================================
 -- BẢNG Course
 -- ========================================
@@ -192,7 +201,7 @@ CREATE TABLE Voucher_Detail
 CREATE TABLE Enrollments
 (
     enrollment_id INT IDENTITY(1,1) PRIMARY KEY,
-    student_id VARCHAR(50) NOT NULL,
+    student_id VARCHAR(10) NOT NULL,
     course_id VARCHAR(20) NOT NULL,
     enrollmentDate DATE NOT NULL DEFAULT GETDATE(),
     voucher_id VARCHAR(10),
@@ -205,15 +214,24 @@ CREATE TABLE Enrollments
     --type đóng vai trò như cả 2 khóa ngoại
     -- CHECK (voucher_type IN ('Voucher', 'VoucherSystem'))
 );
+
+--khi đăng kí khóa học thì check voucher trên hệ thống và lưu với khóa học đó luôn tạo ra bảng này .
 insert into Enrollments
     (student_id, course_id, enrollmentDate, voucher_id, voucher_type,pricePaid)
 VALUES
     ('ST45cb1825', 'CS101', GETDATE(), 'VC001', 'systemVoucher', 1600000),
-    ('ST45cb1826', 'CS102', GETDATE(), NULL, null, 1350000),
-    ('ST45cb1827', 'CS103', GETDATE(), 'VC001', 'systemVoucher', 1800000),
-    ('ST45cb1828', 'CS104', GETDATE(), NULL, null, 1500000),
-    ('ST45cb1829', 'CS105', GETDATE(), 'VC001', 'systemVoucher', 1700000);
+    ('ST45cb1825', 'CS102', GETDATE(), NULL, null, 1350000),
+    ('ST45cb1825', 'CS103', GETDATE(), 'VC001', 'systemVoucher', 1800000),
+    ('ST45cb1825', 'CS104', GETDATE(), NULL, null, 1500000),
+    ('ST45cb1825', 'CS105', GETDATE(), 'VC001', 'systemVoucher', 1700000);
 
+SELECT *
+from Enrollments
+WHERE student_id = 'ST45cb1825';
+
+SELECT *
+from Course
+WHERE course_id = 'CS101';
 -- ========================================
 -- BẢNG Payments
 -- ========================================

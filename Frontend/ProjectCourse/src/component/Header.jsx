@@ -136,7 +136,7 @@ function Header() {
                     </div>
 
                 </li>
-                <li ><Link to=""><FontAwesomeIcon icon={faCartShopping} /></Link></li>
+                <li ><Link to="/ListBuyedCourses"><FontAwesomeIcon icon={faCartShopping} /></Link></li>
 
                 {userEmail ? (
                     <>

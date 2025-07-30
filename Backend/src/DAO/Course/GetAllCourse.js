@@ -90,4 +90,45 @@ router.post('/GetCoursesByIds', async (req, res) => {
 });
 
 
+
+
+router.get('/GetAllBuyedCourses/:id', async (req, res) => {
+    const UserId = req.params.id;
+
+    try {
+        await connection(); // connect mỗi lần
+        const request = new sql.Request();
+        request.input('UserId', sql.VarChar, UserId);
+
+        const result = await request.query('SELECT * FROM Enrollments WHERE student_id = @UserId');
+
+        if (result.recordset.length === 0) {
+            return res.status(404).json({ success: false, message: "No enrollments found" });
+        }
+
+        const courseIds = result.recordset.map(e => e.course_id);
+
+        // Chuẩn bị input động cho truy vấn
+        const request2 = new sql.Request();
+        courseIds.forEach((id, index) => {
+            request2.input(`id${index}`, sql.VarChar, id);
+        });
+
+        const placeholders = courseIds.map((_, index) => `@id${index}`).join(',');
+
+        const query = `SELECT * FROM Course WHERE course_id IN (${placeholders})`;
+        const resultCourses = await request2.query(query);
+
+        res.status(200).json({
+            success: true,
+            courses: resultCourses.recordset
+        });
+
+    } catch (err) {
+        console.error('Error fetching enrolled courses:', err);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+
 module.exports = router;
