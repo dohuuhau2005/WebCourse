@@ -8,11 +8,11 @@ const express = require('express');
 const router = express.Router();
 const sql = require('mssql');
 const { connection } = require('../../Config/Connection');
-router.get('/GetVoucher', async (req, res) => {
-    const voucherId = req.query.id;
+router.get('/GetDiscount', async (req, res) => {
+    const { voucherId, courseID } = req.body;
     try {
         await connection(); // connect DB
-        const result = await sql.query`SELECT * FROM Voucher WHERE voucher_id = ${voucherId}`;
+        const result = await sql.query`SELECT discount FROM Voucher WHERE voucher_id = ${voucherId} and course_id = ${courseID}`;
 
         if (result.recordset.length > 0) {
             res.status(200).json({ success: true, voucher: result.recordset[0] });

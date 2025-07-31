@@ -13,12 +13,13 @@ function BuyCourse() {
     const [discount, setDiscount] = useState(0);
 
     const recommendedRef = useRef();
-    const [voucherList, setVoucherList] = useState([]);
+
     const [name, setName] = useState('');
     const [descriptions, setDescriptions] = useState('');
     const [img, setImg] = useState('');
     const { id } = useParams();
     useEffect(() => {
+
         axios.get(`https://localhost:8888/api/GetCourseById/${id}`)
             .then(response => {
                 if (response.data.success) {
@@ -37,20 +38,6 @@ function BuyCourse() {
             });
     }, [id]);
 
-    useEffect(() => {
-        axios.get(`https://localhost:8888/api/GetVoucher/${id}`)
-            .then(response => {
-                if (response.data.success) {
-                    setVoucherList(response.data.vouchers);
-                } else {
-                    console.error("Failed to fetch course details");
-                }
-            })
-            .catch(error => {
-                console.error("Error fetching course details:", error);
-            });
-
-    }, []);
     useEffect(() => {
         axios.get('https://localhost:8888/api/GetAllCourses')
             .then(response => {
@@ -85,12 +72,34 @@ function BuyCourse() {
     }, []);
     const handleApplyVoucher = () => {
 
-        if (voucher === "DISCOUNT10") {
-            setFinalPrice(price * 0.9);
-        } else {
-            setFinalPrice(price);
-            alert("Voucher không hợp lệ");
-        }
+
+        useEffect(() => {
+
+            axios.get(`https://localhost:8888/api/GetDiscount`, {
+                voucher, id
+            })
+                .then(response => {
+                    if (response.data.success) {
+
+                        //example voucher logic
+                        if (voucher === "DISCOUNT10") {
+                            setFinalPrice(price * 0.9);
+                        } else {
+                            setFinalPrice(price);
+                            alert("Voucher không hợp lệ");
+                        }
+
+
+                    } else {
+                        console.error("Failed to fetch course details");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching course details:", error);
+                });
+
+        }, []);
+
     };
 
     const handleBuy = () => {

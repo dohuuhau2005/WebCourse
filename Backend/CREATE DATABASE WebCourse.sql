@@ -22,6 +22,12 @@ ADD CONSTRAINT PK_Students PRIMARY KEY (id_user);
 ALTER TABLE Users
 ALTER COLUMN id_user VARCHAR(10) NOT NULL;
 
+INSERT INTO Users
+    (id_user, email, password,salt,gender, DOB, registerDate, role, isVerified)
+VALUES
+    ('GV001', 'a@gmail.com', 'f5df9935610acf4df37f0567bec766d5c64a2440a2d2875f8c35e42eeb4db926', '974eeb', 'Male', '1990-01-01', GETDATE(), 'Instructor', 'true'),
+    ('GV002', 'b@gmail.com', 'f5df9935610acf4df37f0567bec766d5c64a2440a2d2875f8c35e42eeb4db926', '974eeb', 'Male', '1990-01-01', GETDATE(), 'Instructor', 'true'),
+    ('GV003', 'c@gmail.com', 'f5df9935610acf4df37f0567bec766d5c64a2440a2d2875f8c35e42eeb4db926', '974eeb', 'Male', '1990-01-01', GETDATE(), 'Instructor', 'true');
 
 
 
@@ -43,17 +49,27 @@ ALTER COLUMN id_user VARCHAR(10) NOT NULL;
 -- ========================================
 CREATE TABLE instructor
 (
-    instructor_id VARCHAR(20) PRIMARY KEY,
+    instructor_id VARCHAR(10) PRIMARY KEY,
     QuantityCourse INT NOT NULL DEFAULT 0,
     FOREIGN KEY (instructor_id) REFERENCES Users(id_user) ON DELETE CASCADE
 );
+
+INSERT into instructor
+    (instructor_id, QuantityCourse)
+VALUES
+    ('GV001', 10),
+    ('GV002', 5),
+    ('GV003', 8);
+
+SELECT *
+from instructor;
 
 -- ========================================
 -- BẢNG staff
 -- ========================================
 CREATE TABLE staff
 (
-    staff_id VARCHAR(20) PRIMARY KEY,
+    staff_id VARCHAR(10) PRIMARY KEY,
     Name NVARCHAR(50) NOT NULL,
     position VARCHAR(13) NOT NULL,
     FOREIGN KEY (staff_id) REFERENCES Users(id_user) ON DELETE CASCADE
@@ -72,12 +88,12 @@ INSERT INTO student
 VALUES
     ('ST45cb1825')
 -- ========================================
--- BẢNG Course
+-- BẢNG Course                    Note : tạo trigger khi xóa voucher thì phải set thành null trong đây
 -- ========================================
 CREATE TABLE Course
 (
     course_id VARCHAR(20) PRIMARY KEY,
-    instructor_id VARCHAR(20),
+    instructor_id VARCHAR(10) NULL,
     imageURL VARCHAR(MAX),
     title NVARCHAR(256),
     description NVARCHAR(256),
@@ -86,8 +102,15 @@ CREATE TABLE Course
     createdDate DATE DEFAULT GETDATE(),
     Type VARCHAR(20),
     QualitiesLectures INT DEFAULT 0,
-    -- FOREIGN KEY (instructor_id) REFERENCES instructor(instructor_id) ON DELETE SET NULL
+    voucher_id VARCHAR(10) null,
+    FOREIGN KEY (voucher_id) REFERENCES Voucher(voucher_id) ON DELETE set null,
+    FOREIGN KEY (instructor_id) REFERENCES instructor(instructor_id) ON DELETE set null
 );
+
+
+
+
+
 
 INSERT INTO Course
     (course_id, instructor_id, imageURL,title, description, OldPrice, NewPrice, createdDate, Type, QualitiesLectures)
@@ -145,11 +168,29 @@ FROM Course
 WHERE course_id = 'cs118'
 
 
+UPDATE Course
+SET voucher_id = 'VC001'
+WHERE course_id in ('CS101','CS102','CS103','CS104','CS105');
+UPDATE Course
+SET voucher_id = 'VC002'
+WHERE course_id in ('CS106','CS107','CS108','CS109','CS110','CS111');
+UPDATE Course
+SET voucher_id = 'VC003'
+WHERE course_id in ('CS112','CS113','CS114','CS115','CS116','CS117','CS118','CS119','CS120','CS121');
 
 
+ALTER TABLE Course
+ADD CONSTRAINT FK__Course__voucher___25518C17
+    FOREIGN KEY (voucher_id) REFERENCES Voucher(voucher_id) ,
+  FOREIGN KEY (instructor_id) REFERENCES instructor(instructor_id) ON DELETE set null;
 
 
+ALTER TABLE Course
+DROP CONSTRAINT FK__Course__voucher___25518C17;
 
+SELECT name
+FROM sys.foreign_keys
+WHERE parent_object_id = OBJECT_ID('Course');
 
 
 
@@ -160,16 +201,23 @@ WHERE course_id = 'cs118'
 CREATE TABLE Voucher
 (
     voucher_id VARCHAR(10) PRIMARY KEY,
-    instructor_id VARCHAR(20) NOT NULL,
-    course_id VARCHAR(20) NOT NULL,
+    instructor_id VARCHAR(10) NOT NULL,
+
     Name NVARCHAR(100) NOT NULL,
     discount INT NOT NULL CHECK (discount >= 0 AND discount <= 100),
     expiryDate DATE NOT NULL,
     startDate DATE NOT NULL,
     description NVARCHAR(MAX) NULL,
     FOREIGN KEY (instructor_id) REFERENCES instructor(instructor_id) ON DELETE CASCADE,
-    FOREIGN KEY (course_id) REFERENCES Course(course_id) ON DELETE CASCADE
+
 );
+
+INSERT INTO Voucher
+    (voucher_id, instructor_id, Name, discount, expiryDate, startDate, description)
+VALUES
+    ('VC001', 'GV001', N'Giảm 20% Java', 20, '2025-12-31', '2025-07-01', N'Dùng cho Java'),
+    ('VC002', 'GV001', N'Giảm 15% Cơ sở dữ liệu', 15, '2025-12-31', '2025-07-01', N'Dùng cho Cơ sở dữ liệu'),
+    ('VC003', 'GV002', N'Giảm 10% Thiết kế Web', 10, '2025-12-31', '2025-07-01', N'Dùng cho Thiết kế Web');
 
 -- ========================================
 -- BẢNG SystemVoucher
@@ -182,6 +230,12 @@ CREATE TABLE SystemVoucher
     expiryDate DATE NOT NULL,
     startDate DATE NOT NULL
 );
+INSERT INTO SystemVoucher
+    (Systemvoucher_id, Name, discount, expiryDate, startDate)
+VALUES
+    ('SV001', N'Giảm 30% toàn bộ', 30, '2025-12-31', '2025-07-01'),
+    ('SV002', N'Giảm 25% khóa học', 25, '2025-12-31', '2025-07-01'),
+    ('SV003', N'Giảm 15% khóa học', 15, '2025-12-31', '2025-07-01');
 
 -- ========================================
 -- BẢNG Voucher_Detail
@@ -194,6 +248,32 @@ CREATE TABLE Voucher_Detail
     FOREIGN KEY (SystemVoucher_id) REFERENCES SystemVoucher(Systemvoucher_id) ON DELETE CASCADE,
     FOREIGN KEY (course_id) REFERENCES Course(course_id) ON DELETE CASCADE
 );
+
+INSERT INTO Voucher_Detail
+    (id_Voucher_detail, SystemVoucher_id, course_id)
+VALUES
+    ('VD001', 'SV001', 'CS101'),
+    ('VD002', 'SV001', 'CS102'),
+    ('VD003', 'SV002', 'CS103'),
+    ('VD004', 'SV002', 'CS104'),
+    ('VD005', 'SV003', 'CS105'),
+    ('VD006', 'SV003', 'CS106'),
+    ('VD007', 'SV001', 'CS107'),
+    ('VD008', 'SV002', 'CS108'),
+    ('VD009', 'SV003', 'CS109'),
+    ('VD010', 'SV001', 'CS110'),
+    ('VD011', 'SV002', 'CS111'),
+    ('VD012', 'SV003', 'CS112'),
+    ('VD013', 'SV001', 'CS113'),
+    ('VD014', 'SV002', 'CS114'),
+    ('VD015', 'SV003', 'CS115'),
+    ('VD016', 'SV001', 'CS116'),
+    ('VD017', 'SV002', 'CS117'),
+    ('VD018', 'SV003', 'CS118'),
+    ('VD019', 'SV001', 'CS119'),
+    ('VD020', 'SV002', 'CS120'),
+    ('VD021', 'SV003', 'CS121');
+
 
 -- ========================================
 -- BẢNG Enrollments
