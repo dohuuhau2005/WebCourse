@@ -8,19 +8,38 @@ const express = require('express');
 const router = express.Router();
 const sql = require('mssql');
 const { connection } = require('../../Config/Connection');
-router.get('/GetDiscount', async (req, res) => {
+router.post('/GetDiscount', async (req, res) => {
     const { voucherId, courseID } = req.body;
+    console.log("body", req.body);
     try {
         await connection(); // connect DB
-        const result = await sql.query`SELECT discount FROM Voucher WHERE voucher_id = ${voucherId} and course_id = ${courseID}`;
-
+        const result = await sql.query`SELECT * FROM Course WHERE RTRIM(voucher_id) = ${voucherId} and RTRIM(course_id) = ${courseID}`;
+        console.log(courseID);
+        console.log(voucherId);
+        console.log("result", result.recordset);
         if (result.recordset.length > 0) {
-            res.status(200).json({ success: true, voucher: result.recordset[0] });
+            const GetDiscountFromCourseInstructor = await sql.query`SELECT discount FROM Voucher WHERE RTRIM(voucher_id) = ${voucherId} `;
+            console.log("GetDiscountFromCourseInstructor", GetDiscountFromCourseInstructor.recordset[0].discount);
+            return res.status(200).json({ success: true, discount: GetDiscountFromCourseInstructor.recordset[0].discount });
         } else {
-            res.status(404).json({ success: false, message: "Voucher not found" });
+            const result2 = await sql.query`SELECT * FROM Voucher_Detail WHERE RTRIM(SystemVoucher_id) = ${voucherId} and RTRIM(course_id) = ${courseID}`;
+            if (result2.recordset.length > 0) {
+                const GetDiscountFromSystem = await sql.query`SELECT discount FROM SystemVoucher WHERE RTRIM(Systemvoucher_id) = ${voucherId} `;
+                console.log("GetDiscountFromSystem", GetDiscountFromSystem.recordset[0].discount);
+                return res.status(200).json({ success: true, discount: GetDiscountFromSystem.recordset[0].discount });
+            } else {
+                console.log("Voucher not found for this course");
+                return res.status(404).json({ success: false, message: "Voucher not found for this course" });
+            }
+
         }
+
+        //     const result = await sql.query`SELECT discount FROM Voucher WHERE voucher_id = ${voucherId} and course_id = ${courseID}`;
+
+
     } catch (err) {
         console.error('Error fetching voucher:', err);
         res.status(500).json({ error: 'Server error' });
     }
 });
+module.exports = router;

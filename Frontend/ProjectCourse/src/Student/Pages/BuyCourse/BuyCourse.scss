@@ -40,7 +40,21 @@
         }
 
     }
+
+    .PayIMG {
+
+        position: absolute !important;
+        border: 1px solid red;
+        display: none;
+
+        &.Active {
+            display: block !important;
+
+        }
+    }
 }
+
+
 
 .course-image {
     width: 100%;

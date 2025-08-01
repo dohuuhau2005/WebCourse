@@ -237,6 +237,10 @@ VALUES
     ('SV002', N'Giảm 25% khóa học', 25, '2025-12-31', '2025-07-01'),
     ('SV003', N'Giảm 15% khóa học', 15, '2025-12-31', '2025-07-01');
 
+SELECT *
+FROM SystemVoucher;
+SELECT *
+from Voucher_Detail
 -- ========================================
 -- BẢNG Voucher_Detail
 -- ========================================

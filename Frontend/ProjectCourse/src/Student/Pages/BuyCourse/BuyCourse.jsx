@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, use } from 'react';
 import './BuyCourse.scss';
 import Header from "../../../component/Header";
 import { Button } from 'react-bootstrap';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 function BuyCourse() {
@@ -11,8 +11,11 @@ function BuyCourse() {
     const [finalPrice, setFinalPrice] = useState(price);
     const [recommendedCourses, setRecommendedCourses] = useState([]);
     const [discount, setDiscount] = useState(0);
-
+    const [URLPAY, setURLPAY] = useState('');
+    const [isActive, setIsActive] = useState(false);
     const recommendedRef = useRef();
+    const location = useLocation();
+    const [ContentPay, setContentPay] = useState(' ');
 
     const [name, setName] = useState('');
     const [descriptions, setDescriptions] = useState('');
@@ -70,40 +73,55 @@ function BuyCourse() {
         // Fetch courses from the backend
 
     }, []);
-    const handleApplyVoucher = () => {
+    const handleApplyVoucher = async () => {
+        try {
+            const response = await axios.post(`https://localhost:8888/api/GetDiscount`, {
+                voucherId: voucher,
+                courseID: id
+            });
+            const success = response.data.success;
+            if (success === true) {
+                const discountValue = response.data.discount / 100;
+                console.log("Discount value:", discountValue);
+                setDiscount(discountValue);
+                setFinalPrice(price * (1 - discountValue));
+                // //example voucher logic
+                // if (voucher === "DISCOUNT10") {
+                //     setFinalPrice(price * 0.9);
+                // } else {
+                //     setFinalPrice(price);
+                //     alert("Voucher không hợp lệ");
+                // }
 
 
-        useEffect(() => {
+            } else {
+                setFinalPrice(price);
+                setDiscount(0);
+                alert("Voucher không hợp lệ");
+            }
 
-            axios.get(`https://localhost:8888/api/GetDiscount`, {
-                voucher, id
-            })
-                .then(response => {
-                    if (response.data.success) {
+            // .catch(error => {
+            //     console.error("Error fetching course details:", error.message);
+            //     alert("Error applying voucher. Please try again.");
+            // });
+        } catch (error) {
+            console.error("Error applying voucher:", error);
+            alert("Error applying voucher, Voucher may not exist or is invalid.");
+        }
 
-                        //example voucher logic
-                        if (voucher === "DISCOUNT10") {
-                            setFinalPrice(price * 0.9);
-                        } else {
-                            setFinalPrice(price);
-                            alert("Voucher không hợp lệ");
-                        }
-
-
-                    } else {
-                        console.error("Failed to fetch course details");
-                    }
-                })
-                .catch(error => {
-                    console.error("Error fetching course details:", error);
-                });
-
-        }, []);
 
     };
 
     const handleBuy = () => {
         alert("Mua khóa học với giá " + finalPrice + " VND");
+        const token = localStorage.getItem('token');
+        const iduser = JSON.parse(atob(token.split('.')[1])).id
+        const Content = `${iduser}${id}`;
+        setContentPay(Content);
+        console.log(Content);
+        setURLPAY(`  https://img.vietqr.io/image/970436-1056526339-compact2.png?amount=${finalPrice}&addInfo=${Content}&accountName=<ACCOUNT_NAME>`);
+
+        setIsActive(true);
     };
 
     const scroll = (ref, direction) => {
@@ -174,6 +192,7 @@ function BuyCourse() {
                         </div>
                     </div>
                 </div>
+                <img className={`PayIMG ${isActive ? 'Active' : ''}`} src={URLPAY} alt="" />
             </div>
         </>
     );

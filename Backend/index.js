@@ -23,6 +23,9 @@ app.use('/api', GetAllCourse);
 const GetUser = require('./src/DAO/Users/GetUserDAO');
 app.use('/api', GetUser);
 
+const GetVoucher = require('./src/DAO/Voucher/GetVoucher');
+app.use('/api', GetVoucher);
+
 app.get('/', (req, res) => {
     res.send('Hello HTTPS!');
 });
